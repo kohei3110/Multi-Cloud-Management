@@ -23,6 +23,10 @@ module "aws_vpc" {
   subnet_count = 1
 }
 
+module "aws_iam" {
+  source = "../../aws/iam"
+}
+
 module "azure_vnet" {
   source = "../../azure/vnet"
 
