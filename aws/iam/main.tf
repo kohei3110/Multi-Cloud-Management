@@ -10,8 +10,28 @@ resource "aws_iam_openid_connect_provider" "github_actions" {
   thumbprint_list = ["a031c46782e6e6c662c2c87c76da9aa62ccabd8e"]
 }
 
+data "aws_iam_policy_document" "github_actions" {
+  // allow running `aws sts get-caller-identity`
+  statement {
+    effect    = "Allow"
+    actions   = ["sts:GetCallerIdentity"]
+    resources = ["*"]
+  }
+}
+
+resource "aws_iam_policy" "github_actions" {
+  name        = "githubactions_policy"
+  path        = "/"
+  description = "Policy for GitHubActions"
+  policy      = data.aws_iam_policy_document.github_actions.json
+}
+
 resource "aws_iam_role" "github_actions" {
   name = "${local.system}-github-actions"
+
+  managed_policy_arns = [
+    aws_iam_policy.github_actions.arn
+  ]
 
   assume_role_policy = <<EOF
 {
