@@ -41,5 +41,10 @@ module "azure_rg" {
 }
 
 terraform {
-  backend "azurerm" {}
+  backend "azurerm" {
+    resource_group_name  = "rg-test-dev"
+    storage_account_name = "tfstatetestdevkohei3110"
+    container_name       = "tfstate"
+    key                  = "terraform.tfstate"
+  }
 }
