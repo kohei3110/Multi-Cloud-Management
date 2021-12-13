@@ -14,7 +14,7 @@ data "aws_iam_policy_document" "github_actions" {
   // allow running `aws sts get-caller-identity`
   statement {
     effect    = "Allow"
-    actions   = ["sts:GetCallerIdentity"]
+    actions   = ["*"]
     resources = ["*"]
   }
 }
