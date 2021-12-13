@@ -8,10 +8,10 @@ provider "azurerm" {
 }
 
 locals {
-  aws_region               = "us-west-2"
-  azure_location           = "japaneast"
-  env                      = "stg"
-  resource_group_name      = "rg-test-${local.env}"
+  aws_region          = "us-west-2"
+  azure_location      = "japaneast"
+  env                 = "stg"
+  resource_group_name = "rg-test-${local.env}"
 }
 
 
@@ -34,10 +34,10 @@ module "azure_vnet" {
 }
 
 module "azure_rg" {
-    source = "../../azure/rg"
+  source = "../../azure/rg"
 
-    rg_name           = local.resource_group_name
-    location          = local.azure_location
+  rg_name  = local.resource_group_name
+  location = local.azure_location
 }
 
 terraform {

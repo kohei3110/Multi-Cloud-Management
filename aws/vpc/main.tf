@@ -8,8 +8,8 @@ resource "aws_vpc" "main" {
 resource "aws_subnet" "public" {
   count = var.subnet_count
 
-  vpc_id            = aws_vpc.main.id
-  cidr_block        = cidrsubnet(var.cidr_block, 4, count.index * 2 + 2)
+  vpc_id     = aws_vpc.main.id
+  cidr_block = cidrsubnet(var.cidr_block, 4, count.index * 2 + 2)
 }
 
 resource "aws_network_acl" "public" {
@@ -86,9 +86,9 @@ resource "aws_route_table" "public" {
 }
 
 resource "aws_route" "public_igw" {
-  route_table_id            = aws_route_table.public.id
-  destination_cidr_block    = "0.0.0.0/0"
-  gateway_id = aws_internet_gateway.gw.id
+  route_table_id         = aws_route_table.public.id
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id             = aws_internet_gateway.gw.id
 }
 
 
